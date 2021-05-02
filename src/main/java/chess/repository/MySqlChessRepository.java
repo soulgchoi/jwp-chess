@@ -5,7 +5,6 @@ import chess.domain.piece.Color;
 import chess.utils.Serializer;
 import java.util.List;
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -23,7 +22,7 @@ public class MySqlChessRepository implements ChessRepository {
 
     @Override
     public Optional<Long> findGame(String title) {
-        String findTitleQuery = "SELECT id FROM chess_game WHERE BINARY title = ?";
+        String findTitleQuery = "SELECT id FROM chess_game WHERE title = ?";
         return jdbcTemplate.queryForList(findTitleQuery, Long.class, title)
             .stream()
             .findAny();
